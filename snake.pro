@@ -71,8 +71,6 @@ include(../hobrasofthttp-1.0.7/src/hobrasofthttpd.pri)
 #include(QtWebApp/templateengine/templateengine.pri)
 # Not used: include(../QtWebApp/qtservice/qtservice.pri)
 
-QTBINPATH = D:/Qt/Qt5.8.0_msvc2015/5.8/msvc2015_64/bin
-
 isEmpty(TARGET_EXT) {
     win32 {
         TARGET_CUSTOM_EXT = .exe
