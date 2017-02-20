@@ -39,7 +39,7 @@ void Twitch::setHostValidated(bool hostValidated)
          qDebug() << "Stream info received. Parsing...";
         QJsonDocument jsonResponse = QJsonDocument::fromJson(data.toUtf8());
         QJsonObject jsonObject = jsonResponse.object();
-        if(jsonObject["stream"] != NULL){
+        if(!jsonObject["stream"].isNull()){
             _isLive = true;
             _viewersCount = jsonObject["viewers"].toInt();
         }else{
