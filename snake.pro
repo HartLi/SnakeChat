@@ -39,7 +39,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
+else: unix:!android: target.path = /tmp/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
@@ -93,14 +93,13 @@ CONFIG( debug, debug|release ) {
     DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/release/$${TARGET}$${TARGET_CUSTOM_EXT}))
     DESTDIR = release
 }
-
+web.path = $${OUT_PWD}/$${DESTDIR}/web
+web.files = web/*
 win32 {
-    web.path = $${OUT_PWD}/$${DESTDIR}/web
-    web.files = web/*
     DEPLOY_COMMAND = windeployqt --qmldir $${PWD}
 }
 macx {
-    DEPLOY_COMMAND = macdeployqt $${DESTDIR}/snake.app -qmldir=$${PWD} -dmg
+    DEPLOY_COMMAND = macdeployqt $${OUT_PWD}/$${DESTDIR}/snake.app -qmldir=$${PWD} -dmg
 }
 
 #  # Uncomment the following line to help debug the deploy command when running qmake
