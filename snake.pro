@@ -102,7 +102,7 @@ win32 {
     DEPLOY_COMMAND = windeployqt --qmldir $${PWD}
 }
 macx {
-    DEPLOY_COMMAND = macdeployqt
+    DEPLOY_COMMAND = macdeployqt --qmldir $${PWD} -dmg
 }
 
 #  # Uncomment the following line to help debug the deploy command when running qmake
