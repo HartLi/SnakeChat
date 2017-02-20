@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>SettingsUI.qml</file>
+        <file>SideMenu.qml</file>
+        <file>images/Splash.png</file>
+        <file>Splash.qml</file>
+        <file>mainLoader.qml</file>
+        <file>ColorDialogPreview.qml</file>
+    </qresource>
+</RCC>

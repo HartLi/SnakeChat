@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body style="background-color: #7D5BBE; color:#ffffff;" onLoad="checkForToken();">
+<div><h1>Authorization for Snake Chat was successful!</h1></div>
+<div><h2>Your new token is:</h2></div>
+<div id="token"></div>
+<script type="text/javascript">
+
+	function checkForToken(){
+		var hash = document.location.hash;
+		if(hash){
+			var elements = hash.substring(1).split("&");
+			var keyValues = [];
+			elements.forEach(function (element) {
+					var keyValue = element.split("=");
+					keyValues[keyValue[0]] = keyValue[1];
+			});
+			var token = document.getElementById("token");
+			var p = document.createElement('h2');
+			p.innerHTML = keyValues["access_token"];
+			token.appendChild(p);
+			var json = JSON.stringify({
+			  token: keyValues["access_token"]
+			});
+			sendRequest(json, '/twitch_oauth');
+		}
+	}
+
+	function sendRequest(data, url){
+		var xhr = new XMLHttpRequest();
+
+
+
+		xhr.open("POST", url, true)
+		xhr.setRequestHeader('Content-Type', 'application/json')
+
+		xhr.onreadystatechange = function() {
+	  if (this.readyState != XMLHttpRequest.DONE) return;
+
+		}
+
+		xhr.send(data);
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/x-mark-16.png</file>
+        <file>icons/minus-2-16.png</file>
+        <file>icons/settings-4-16.png</file>
+        <file>icons/resize-8-16.png</file>
+        <file>web/images/twitch.png</file>
+        <file>icons/arrow-24-16.png</file>
+        <file>icons/arrow-203-16.png</file>
+        <file>icons/plus-5-16.png</file>
+        <file>icons/minus-5-16.png</file>
+        <file>icons/minus-5-24.png</file>
+        <file>icons/plus-5-24.png</file>
+        <file>icons/minus-5-24-red.png</file>
+        <file>icons/plus-5-24-green.png</file>
+        <file>icons/reload-24.png</file>
+        <file>icons/reload-24-lightblue.png</file>
+    </qresource>
+</RCC>
