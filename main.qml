@@ -108,15 +108,32 @@ ApplicationWindow {
                 }
             }
             MouseArea {
-                height: 23
                 width: mainWindow.width
-                property point lastMousePos: Qt.point(0, 0)
-                onPressed: { lastMousePos = Qt.point(mouseX, mouseY); }
-                onMouseXChanged: mainWindow.x += (mouseX - lastMousePos.x)
-                onMouseYChanged: mainWindow.y += (mouseY - lastMousePos.y)
+                height: 25
+                property variant clickPos: "1,1"
+
+                onPressed: {
+                    clickPos = Qt.point(mouse.x,mouse.y)
+                }
+
+                onPositionChanged: {
+                    var delta = Qt.point(mouse.x-clickPos.x, mouse.y-clickPos.y)
+                    var new_x = mainWindow.x + delta.x
+                    var new_y = mainWindow.y + delta.y
+                    if (new_y <= 0)
+                        mainWindow.visibility = Window.Maximized
+                    else
+                    {
+                        if (mainWindow.visibility === Window.Maximized)
+                            mainWindow.visibility = Window.Windowed
+                        mainWindow.x = new_x
+                        mainWindow.y = new_y
+                    }
+                }
             }
 
         }
+
     }
     Page {
         id: chatPage
