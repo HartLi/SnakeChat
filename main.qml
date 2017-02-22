@@ -10,8 +10,8 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow {
     id: mainWindow
     visible: true
-    width: settings.value("window_width", 800)
-    height: settings.value("window_height", 600)
+    width: settings.value("window_width", 400)
+    height: settings.value("window_height", 300)
     x: settings.value("window_x", 100)
     y: settings.value("window_y", 100)
     title: qsTr("Snake Chat")
@@ -23,7 +23,7 @@ ApplicationWindow {
     property bool settingsShown: false
     property variant settingsWindow;
     property variant settingsComponent;
-    header:LinearGradient    {
+    header:LinearGradient {
         id: rectHeader
         height: 30
         start: Qt.point(0, 0)
@@ -175,6 +175,9 @@ ApplicationWindow {
                 }else if(request.url.toString().indexOf("localhost") === -1){
                     request.action = WebEngineView.IgnoreRequest
                 }
+            }
+            onCertificateError: {
+                error.ignoreCertificateError()
             }
         }
 
