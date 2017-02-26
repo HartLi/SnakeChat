@@ -33,9 +33,11 @@ private:
     QNetworkAccessManager *_networkManager;
 signals:
     void alertMessage(QVariant text);
+    void channelNotExists(const QVariant uuid, const QVariant channel);
 public slots:
     void onMessage(QString uid, int service, QString channel, QString nickname, QString text, QString receiver, QHash<QString, QVariant> messageOptions);
     void onChannelFound(const QString uuid, const QString channel, const int type);
+
 };
 
 #endif // SERVICEMANAGER_H

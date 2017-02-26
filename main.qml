@@ -10,8 +10,8 @@ import QtQuick.Dialogs 1.2
 ApplicationWindow {
     id: mainWindow
     visible: true
-    width: settings.value("window_width", 400)
-    height: settings.value("window_height", 300)
+    width: settings.value("window_width", 315)
+    height: settings.value("window_height", 475)
     x: settings.value("window_x", 100)
     y: settings.value("window_y", 100)
     title: qsTr("Snake Chat")
@@ -21,8 +21,10 @@ ApplicationWindow {
     flags: settings.value("native_titlebar", "false") === "false" ? Qt.Window | Qt.FramelessWindowHint : Qt.Window | Qt.WindowTitleHint | Qt.WindowSystemMenuHint | Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint | Qt.WindowMaximizeButtonHint
 
     property bool settingsShown: false
-    property variant settingsWindow;
-    property variant settingsComponent;
+    property variant settingsWindow
+    property variant settingsComponent
+    signal popupClosed
+
     header:LinearGradient {
         id: rectHeader
         height: 30
@@ -276,7 +278,9 @@ ApplicationWindow {
     Popup {
         id: popup
         property string text: ""
+
         parent: ApplicationWindow.overlay
+        modal: true
         background: Rectangle{
             border.color: Material.color(Material.BlueGrey, Material.Shade300)
             color: mainWindow.color
@@ -304,6 +308,7 @@ ApplicationWindow {
             text: "Ok"
             onClicked: {
                 popup.close()
+                popupClosed()
             }
         }
     }

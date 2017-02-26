@@ -61,7 +61,7 @@ QString ServiceManager::addService(const int type, const QString channel, const 
                 Twitch *twitch = (Twitch*)_services.value(uuid);
                 _settings->remove(twitch->getChannel(), "Services");
                 _services.remove(uuid);
-
+                emit channelNotExists(service_uuid, twitch->getChannel());
                 twitch->deleteLater();
                 emit alertMessage(QString("Channel '%1' does not exists!").arg(channel));
             });

@@ -46,7 +46,8 @@ protected:
     QHash<int, QByteArray> roleNames() const;
 private:
     QList<ServiceChannel> _services;
-
+signals:
+    void itemAdded();
 
 };
 

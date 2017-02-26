@@ -33,6 +33,7 @@ void ServicesModel::addService(const ServiceChannel &serviceChannel)
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     _services << serviceChannel;
     endInsertRows();
+    emit itemAdded();
 }
 
 QString const ServicesModel::removeService(const QString &uuid)

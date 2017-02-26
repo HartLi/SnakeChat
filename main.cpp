@@ -13,6 +13,8 @@
 #include <QQmlContext>
 #include <fstream>
 #include <iostream>
+using namespace HobrasoftHttpd;
+
 int main(int argc, char *argv[])
 {
 
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
     ServicesModel *servicesModel = new ServicesModel(&app);
     ServiceManager *serviceManager = new ServiceManager(&settings, servicesModel, &websocket, &app);
 
-    using namespace HobrasoftHttpd;
+
     HttpSettings const httpSettings(&listenerSettings, 0);
     new MyHttpd(encryptedSettings,&settings, &httpSettings, &app);
     QStringList const channels = settings.readGroupKeys("Services");
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
     QObject *topLevel = engine.rootObjects().value(0);
     QQuickWindow *window = qobject_cast<QQuickWindow *>(topLevel);
     QObject::connect(serviceManager, SIGNAL(alertMessage(QVariant)), window, SLOT(alertMessage(QVariant)));
-
+//    QObject::connect(serviceManager, SIGNAL(channelNotExists(QVariant,QVariant)), window, SLOT(channelNotFound(QVariant, QVariant)));
     return app.exec();
 
 }

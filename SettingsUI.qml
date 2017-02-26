@@ -710,12 +710,11 @@ Window {
                 width: parent.width
                 height: 50
                 spacing: 15
+
                 function addChannel(){
-                    if(settings.value(tfChannelName.text, -1, "Services") === comboChannels.currentIndex){
-                        messageDialog.text = "Channel is already added!"
+                    if(tfChannelName.text !== "" && settings.value(tfChannelName.text, -1, "Services") === comboChannels.currentIndex){
                         addChannelBusyIndicator.running = false
-                        timer.stop()
-                        messageDialog.visible = true
+                        mainWindow.alertMessage("Channel is already added!")
                     }
                     else if(tfChannelName.text.length > 0){
                         switch(comboChannels.currentIndex){
@@ -737,10 +736,8 @@ Window {
                         }
                         tfChannelName.text = ""
                     }else{
-                        messageDialog.text = "Channel can't be empty!"
                         addChannelBusyIndicator.running = false
-                        timer.stop()
-                        messageDialog.visible = true
+                        mainWindow.alertMessage("Channel can't be empty!")
                     }
                 }
                 ComboBox{
@@ -764,7 +761,6 @@ Window {
                     Keys.onPressed: {
                         if(event.key === Qt.Key_Return || event.key === Qt.Key_Enter){
                             rowService.addChannel()
-                            timer.start()
                             addChannelBusyIndicator.running = true
                         }
                     }
@@ -781,7 +777,6 @@ Window {
 
                         onClicked: {
                             rowService.addChannel()
-                            timer.start()
                             addChannelBusyIndicator.running = true
                         }
 
@@ -810,14 +805,27 @@ Window {
                     width: 36
                     height: 36
                     anchors.verticalCenter: parent.verticalCenter
-                    Timer{
-                        id: timer
-                        interval: 1000
-                        repeat: false
-                        onTriggered: {
+                    Connections {
+                        target: serviceManager
+                        onChannelNotExists: {
                             addChannelBusyIndicator.running = false
                         }
                     }
+
+                    Connections{
+                        target: servicesModel
+                        onItemAdded: {
+                            addChannelBusyIndicator.running = false
+                        }
+                    }
+
+                    Connections{
+                        target: mainWindow
+                        onPopupClosed: {
+                            addChannelBusyIndicator.running = false
+                        }
+                    }
+
                 }
             }
         }
@@ -904,6 +912,7 @@ Window {
         messageDialog.text = text
         messageDialog.visible = true
     }
+
 
     onClosing: {
         mainWindow.settingsShown = false
